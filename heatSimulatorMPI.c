@@ -50,12 +50,6 @@ PARALLEL MPI VERSION :
 #define NN 200
 #define MM 200  
 
-#define BLOCK_LOW(id,p,n) ((id)*(n)/(p))
-#define BLOCK_HIGH(id,p,n) ((id+1)*(n)/(p) - 1)
-#define BLOCK_SIZE(id,p,n) ((id+1)*(n)/(p) - (id)*(n)/(p))
-#define BLOCK_OWNER(index,p,n) (((p)*((index)+1)-1)/(n))
-
-
 float update(int rank,int size, int nx,int ny, double *u, double *unew);
 void inidat(int rank, int size, int nx, int ny, double *u, double *unew); 
 void imprime(int rank, int nx, int ny, double *u,const char *fnam);
