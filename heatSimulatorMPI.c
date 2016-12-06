@@ -50,6 +50,11 @@ PARALLEL MPI VERSION :
 #define NN 200
 #define MM 200  
 
+#define BLOCK_LOW(id,p,n) ((id)*(n)/(p))
+#define BLOCK_HIGH(id,p,n) ((id+1)*(n)/(p) - 1)
+#define BLOCK_SIZE(id,p,n) ((id+1)*(n)/(p) - (id)*(n)/(p))
+#define BLOCK_OWNER(index,p,n) (((p)*((index)+1)-1)/(n))
+
 
 float update(int rank,int size, int nx,int ny, double *u, double *unew);
 void inidat(int rank, int size, int nx, int ny, double *u, double *unew); 
@@ -63,7 +68,8 @@ int main(int argc, char *argv[])
     int N=NN,M=MM;
     float epsilon;
   
-    int size,rank;
+    int size,rank,i;
+
    
     /* INITIALIZE MPI */
     MPI_Init(&argc, &argv);
@@ -84,10 +90,38 @@ int main(int argc, char *argv[])
     MPI_Bcast(&N , 1, MPI_INT, 0 , MPI_COMM_WORLD);
     //Exchange epsilon  
     MPI_Bcast(&epsilon , 1, MPI_FLOAT, 0 , MPI_COMM_WORLD);
+    MPI_Status status;
+
+    if(rank==0){
+
+    int linhas = MM/size;
+    int j;
+    int extra = MM%size;
+    int *processos    = (int*)malloc(size * sizeof(int));
+        for (i=0; i<size; i++)
+      {
+           if(i<extra){
+            processos[i]=linhas+1;
+        }
+           else{
+            processos[i]=linhas;
+
+      }
+    }
+      for(j=1;j<size;j++)
+        MPI_Send(&processos[j],1, MPI_INT,j, 0,MPI_COMM_WORLD); 
+    M=processos[0];
+    }
+
+    MPI_Barrier(MPI_COMM_WORLD);
     
+    if(rank>0) {
+        MPI_Recv(&M,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
+    }
 
     //local size
-    M = (N-2) / size + 2 ;
+   
+    MPI_Barrier(MPI_COMM_WORLD);
 
     double *u     = (double *)malloc(N * M * sizeof(double));
     double *unew  = (double *)malloc(N * M * sizeof(double));
@@ -95,9 +129,9 @@ int main(int argc, char *argv[])
     /* Initialize grid and create input file 
      * each process initialize its part
      * */
-
     inidat(rank,size,M,N,u,unew);
-    MPI_Status status;
+//          imprime(rank,M,N, u, "inicial.txt");
+
     
     if (rank == 0) {
         printf ( "\n" );
@@ -153,12 +187,16 @@ int main(int argc, char *argv[])
         imprime(rank,M,N, u, "final.txt");
         
         for (int i = 1; i < size; i++) {
+
           MPI_Recv(buffer,N*M,MPI_DOUBLE,i,0,MPI_COMM_WORLD, &status);
+          MPI_Recv(&M,1,MPI_INT,i,0,MPI_COMM_WORLD, &status);
           imprime(i,M,N, buffer, "final.txt");
         }
 
      }else {
           MPI_Send(u,N*M, MPI_DOUBLE,0, 0,MPI_COMM_WORLD);
+          MPI_Send(&M,1, MPI_INT,0, 0,MPI_COMM_WORLD);
+
           }
 
     free(u);
@@ -175,7 +213,6 @@ float update(int rank, int size, int nx,int ny, double *u, double *unew){
     int ix, iy;
     float  diff=0.0;
     MPI_Status status;
-
 
     /*
      * EXCHANGE GHOST CELL
@@ -203,8 +240,7 @@ float update(int rank, int size, int nx,int ny, double *u, double *unew){
 
     for (ix = 1; ix < nx-1; ix++) {
         for (iy = 1; iy < ny-1; iy++) {
-            unew[ix*ny+iy] = (u[(ix+1)*ny+iy] +  u[(ix-1)*ny+iy] + u[ix*ny+iy+1] +  u[ix*ny+iy-1] )/4.0
-                ;
+            unew[ix*ny+iy] = (u[(ix+1)*ny+iy] +  u[(ix-1)*ny+iy] + u[ix*ny+iy+1] +  u[ix*ny+iy-1] )/4.0;
            diff = fmax( diff, fabs(unew[ix*ny+iy] - u[ix*ny+iy]));
         }
 
@@ -273,7 +309,6 @@ void inidat(int rank, int size,int nx, int ny, double *u, double *unew)
          u[iy]=0.0; 
 
     }
-
 }
 
 
@@ -300,7 +335,7 @@ void imprime(int rank, int nx, int ny, double *u,const char *fname)
 
             fprintf(fp, "%6.2f ", u[ix*ny+iy]);
         }
-    //    fprintf(fp, "RANK%d\n",rank );
+       // fprintf(fp, "RANK%d\n",rank );
         fputc ( '\n', fp);
     }
 
