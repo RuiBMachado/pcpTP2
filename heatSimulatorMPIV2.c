@@ -180,18 +180,22 @@ int main(int argc, char *argv[])
         printf ("  Solution written to the output file %s\n", "final.txt" );
         printf ( "  Normal end of execution.\n" );
         
-        double *buffer    = (double *)malloc(N * M * sizeof(double));
 
         imprime(rank,M-2,N, u, "final.txt");
         
         for (int i = 1; i < size; i++) {
 
           MPI_Recv(&M,1,MPI_INT,i,0,MPI_COMM_WORLD, &status);
+
+          double *buffer    = (double *)malloc(N * M * sizeof(double));
+
           MPI_Recv(buffer,N*M,MPI_DOUBLE,i,0,MPI_COMM_WORLD, &status);
           if(i==size-1)imprime(i,M,N, buffer, "final.txt");
           else imprime(i,M-2,N, buffer, "final.txt");
+          free(buffer);
       
       }
+
      }else {
           MPI_Send(&M,1, MPI_INT,0, 0,MPI_COMM_WORLD);
           MPI_Send(u,N*M, MPI_DOUBLE,0, 0,MPI_COMM_WORLD);
