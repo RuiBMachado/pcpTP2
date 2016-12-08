@@ -40,8 +40,8 @@ PARALLEL MPI VERSION :
 #include <stdlib.h>
 #include <math.h>
 #include <mpi.h>
-#define NN 20
-#define MM 20  
+#define NN 30
+#define MM 30  
 
 double update(int rank,int size, int nx,int ny, double *u, double *unew);
 void inicializa(int rank, int size, int nx, int ny, double *u); 
@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 { 
     int N=NN,M=MM;
     float epsilon;
-  
+    int qtdlinhas;
     int size,rank,i;
 
    
@@ -73,8 +73,8 @@ int main(int argc, char *argv[])
     //Wait for rank 0 , all process start here 
     MPI_Barrier(MPI_COMM_WORLD);
 
-    //Exchange N
-    MPI_Bcast(&N , 1, MPI_INT, 0 , MPI_COMM_WORLD);
+    //Exchange M
+    MPI_Bcast(&M , 1, MPI_INT, 0 , MPI_COMM_WORLD);
     //Exchange epsilon  
     MPI_Bcast(&epsilon , 1, MPI_FLOAT, 0 , MPI_COMM_WORLD);
     MPI_Status status;
@@ -100,19 +100,19 @@ int main(int argc, char *argv[])
         MPI_Send(&processos[j],1, MPI_INT,j, 0,MPI_COMM_WORLD); 
     
     if(processos[0]==1)
-          M=processos[0];
-    else M = processos[0]-1;
+          qtdlinhas=processos[0];
+    else qtdlinhas = processos[0]-1;
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
     
     if(rank>0) {
       if(rank==size-1){
-                MPI_Recv(&M,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
-                if(M>1)M=M-1;
+                MPI_Recv(&qtdlinhas,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
+                if(qtdlinhas>1)qtdlinhas=qtdlinhas-1;
 
       }else
-        MPI_Recv(&M,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
+        MPI_Recv(&qtdlinhas,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
     }
      //   M=(NN)/size + 2;
     //local size
@@ -121,13 +121,13 @@ int main(int argc, char *argv[])
 
     MPI_Barrier(MPI_COMM_WORLD);
 
-    double *u     = (double *)malloc(N * M * sizeof(double));
-    double *unew  = (double *)malloc(N * M * sizeof(double));
+    double *u     = (double *)malloc(qtdlinhas * M * sizeof(double));
+    double *unew  = (double *)malloc(qtdlinhas * M * sizeof(double));
 
     /* Initialize grid and create input file 
      * each process initialize its part
      * */
-    inicializa(rank,size,M,N,u);
+    inicializa(rank,size,qtdlinhas,M,u);
 //         imprime(rank,M,N, u, "inicial.txt");
 
     if (rank == 0) {
@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
 
     while( epsilon<=globaldiff )  {
 
-        diff= update(rank,size,M,N, u, unew);
+        diff= update(rank,size,qtdlinhas,M, u, unew);
 
         /**
          *   COMPUTE GLOBAL CONVERGENCE
@@ -181,24 +181,24 @@ int main(int argc, char *argv[])
         printf ( "  Normal end of execution.\n" );
         
 
-        imprime(rank,M-2,N, u, "final.txt");
+        imprime(rank,qtdlinhas-2,M, u, "final.txt");
         
         for (int i = 1; i < size; i++) {
 
-          MPI_Recv(&M,1,MPI_INT,i,0,MPI_COMM_WORLD, &status);
+          MPI_Recv(&qtdlinhas,1,MPI_INT,i,0,MPI_COMM_WORLD, &status);
 
-          double *buffer    = (double *)malloc(N * M * sizeof(double));
+          double *buffer    = (double *)malloc(qtdlinhas * M * sizeof(double));
 
-          MPI_Recv(buffer,N*M,MPI_DOUBLE,i,0,MPI_COMM_WORLD, &status);
-          if(i==size-1)imprime(i,M,N, buffer, "final.txt");
-          else imprime(i,M-2,N, buffer, "final.txt");
+          MPI_Recv(buffer,qtdlinhas*M,MPI_DOUBLE,i,0,MPI_COMM_WORLD, &status);
+          if(i==size-1)imprime(i,qtdlinhas,M, buffer, "final.txt");
+          else imprime(i,qtdlinhas-2,M, buffer, "final.txt");
           free(buffer);
       
       }
 
      }else {
-          MPI_Send(&M,1, MPI_INT,0, 0,MPI_COMM_WORLD);
-          MPI_Send(u,N*M, MPI_DOUBLE,0, 0,MPI_COMM_WORLD);
+          MPI_Send(&qtdlinhas,1, MPI_INT,0, 0,MPI_COMM_WORLD);
+          MPI_Send(u,qtdlinhas*M, MPI_DOUBLE,0, 0,MPI_COMM_WORLD);
           }
 
     free(u);
