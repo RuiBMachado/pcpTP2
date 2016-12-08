@@ -44,7 +44,7 @@ PARALLEL MPI VERSION :
 #define MM 20  
 
 double update(int rank,int size, int nx,int ny, double *u, double *unew);
-void inidat(int rank, int size, int nx, int ny, double *u); 
+void inicializa(int rank, int size, int nx, int ny, double *u); 
 void imprime(int rank, int nx, int ny, double *u,const char *fnam);
 
 
@@ -79,13 +79,14 @@ int main(int argc, char *argv[])
     MPI_Bcast(&epsilon , 1, MPI_FLOAT, 0 , MPI_COMM_WORLD);
     MPI_Status status;
 
-   /* if(rank==0){
+   if(rank==0){
 
-    int linhas = (MM/size+2;
+    int linhas = NN/size+2;
     int j;
-    int extra = MM%size;
+    int extra = NN%size;
     int *processos    = (int*)malloc(size * sizeof(int));
-        for (i=0; i<size; i++)
+  
+  for (i=0; i<size; i++)
       {
            if(i<extra){
             processos[i]=linhas+1;
@@ -97,17 +98,27 @@ int main(int argc, char *argv[])
     }
       for(j=1;j<size;j++)
         MPI_Send(&processos[j],1, MPI_INT,j, 0,MPI_COMM_WORLD); 
-    M=processos[0];
+    
+    if(processos[0]==1)
+          M=processos[0];
+    else M = processos[0]-1;
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
     
     if(rank>0) {
+      if(rank==size-1){
+                MPI_Recv(&M,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
+                if(M>1)M=M-1;
+
+      }else
         MPI_Recv(&M,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
-    }*/
-        M=(NN-2)/size +2;
+    }
+     //   M=(NN)/size + 2;
     //local size
-   
+   //if(rank==0)M=M-1;
+  //if(rank==size-1) M = M-1;
+
     MPI_Barrier(MPI_COMM_WORLD);
 
     double *u     = (double *)malloc(N * M * sizeof(double));
@@ -116,7 +127,7 @@ int main(int argc, char *argv[])
     /* Initialize grid and create input file 
      * each process initialize its part
      * */
-    inidat(rank,size,M,N,u);
+    inicializa(rank,size,M,N,u);
 //         imprime(rank,M,N, u, "inicial.txt");
 
     if (rank == 0) {
@@ -174,10 +185,12 @@ int main(int argc, char *argv[])
         imprime(rank,M-2,N, u, "final.txt");
         
         for (int i = 1; i < size; i++) {
+
           MPI_Recv(&M,1,MPI_INT,i,0,MPI_COMM_WORLD, &status);
           MPI_Recv(buffer,N*M,MPI_DOUBLE,i,0,MPI_COMM_WORLD, &status);
           if(i==size-1)imprime(i,M,N, buffer, "final.txt");
           else imprime(i,M-2,N, buffer, "final.txt");
+      
       }
      }else {
           MPI_Send(&M,1, MPI_INT,0, 0,MPI_COMM_WORLD);
@@ -247,7 +260,7 @@ double update(int rank, int size, int nx,int ny, double *u, double *unew){
  *  Initialize Data
  *****************************************************************************/
 
-void inidat(int rank, int size,int nx, int ny, double *u) 
+void inicializa(int rank, int size,int nx, int ny, double *u) 
 {
     int ix, iy;
 
@@ -288,11 +301,7 @@ void inidat(int rank, int size,int nx, int ny, double *u)
 
     //boundary top
     for (iy = 1; iy < ny; iy++){ 
-       if(rank==0)
         u[iy]=0.0;
-      else
-         u[iy]=0.0; 
-
     }
 }
 
@@ -309,8 +318,7 @@ void imprime(int rank, int nx, int ny, double *u,const char *fname)
     fp = fopen(fname, "a");
 
     if(rank==0) {
-      int linhas = NN-3;
-        fprintf(fp,"%d", linhas);
+        fprintf(fp,"%d", NN);
         fputc ( '\n', fp);
         fprintf(fp, "%d",MM);
         fputc ( '\n', fp);
