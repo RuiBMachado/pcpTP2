@@ -1,0 +1,785 @@
+REPETICAO 1
+Processo 2
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 2 processos em 0.093121 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 4
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 4 processos em 0.077306 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 8
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 8 processos em 0.067759 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 16
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 16 processos em 0.063927 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 24
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 24 processos em 0.871964 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 32
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 32 processos em 40.332893 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+REPETICAO 2
+Processo 2
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 2 processos em 0.092323 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 4
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 4 processos em 0.076126 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 8
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 8 processos em 0.066346 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 16
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 16 processos em 0.067324 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 24
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 24 processos em 0.088536 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 32
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 32 processos em 74.029926 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+REPETICAO 3
+Processo 2
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 2 processos em 0.091697 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 4
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 4 processos em 0.075243 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 8
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 8 processos em 0.066499 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 16
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 16 processos em 0.066193 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 24
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 24 processos em 0.083245 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 32
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 32 processos em 33.523219 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+REPETICAO 4
+Processo 2
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 2 processos em 0.093095 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 4
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 4 processos em 0.075377 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 8
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 8 processos em 0.066789 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 16
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 16 processos em 0.066014 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 24
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 24 processos em 0.227147 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 32
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 32 processos em 36.989062 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+REPETICAO 5
+Processo 2
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 2 processos em 0.092146 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 4
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 4 processos em 0.075972 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 8
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 8 processos em 0.065716 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 16
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 16 processos em 0.066493 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 24
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 24 processos em 0.086739 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
+Processo 32
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377325
+       128  0.189162
+       256  0.094472
+       512  0.047080
+      1024  0.022267
+      2048  0.008933
+      4096  0.002633
+
+      5991  0.001000
+
+  Error tolerance achieved.
+Concluido com 32 processos em 36.452719 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
+
