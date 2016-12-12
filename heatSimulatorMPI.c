@@ -1,41 +1,4 @@
-/****************************************************************************
- * DESCRIPTION:  
- *   MPI HEAT2D Example - C Version
- *   This example is based on a simplified 
- *   two-dimensional heat equation domain decomposition.  The initial 
- *   temperature is computed to be high in the middle of the domain and 
- *   zero at the boundaries.  The boundaries are held at zero throughout 
- *   the simulation.  During the time-stepping, an array containing two 
- *   domains is used; these domains alternate between old data and new data.
- *
- *  The physical region, and the boundary conditions, are suggested
-    by this diagram;
-                   u = 0
-             +------------------+
-             |                  |
-    u = 100  |                  | u = 100
-             |                  |
-             |                  |
-             |                  |
-             |                  |
-             +------------------+
-                   u = 100
-Interrior point :
-  u[Central] = (1/4) * ( u[North] + u[South] + u[East] + u[West] )
-PARALLEL MPI VERSION :
-           +-------------------+
-           |                   | P0   m=(n-2)/P +2
-           +-------------------+
-           |                   | P1
-           +-------------------+
-       n   |                   | ..
-           +-------------------+
-           |                   | Pq
-           +-------------------+
-                 
-           <-------- n -------->  
-            <-------n-2 ------>
- ****************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -58,24 +21,18 @@ int main(int argc, char *argv[])
     int size,rank,i;
 
    
-    /* INITIALIZE MPI */
     MPI_Init(&argc, &argv);
 
-    /* GET THE PROCESSOR ID AND NUMBER OF PROCESSORS */
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
-    //Only Rank 0 read application parameters
     if(rank==0) {     
         epsilon = atof(argv[1]);
     }
 
-    //Wait for rank 0 , all process start here 
     MPI_Barrier(MPI_COMM_WORLD);
 
-    //Exchange M
     MPI_Bcast(&M , 1, MPI_INT, 0 , MPI_COMM_WORLD);
-    //Exchange epsilon  
     MPI_Bcast(&epsilon , 1, MPI_FLOAT, 0 , MPI_COMM_WORLD);
     MPI_Status status;
 
@@ -114,21 +71,14 @@ int main(int argc, char *argv[])
       }else
         MPI_Recv(&qtdlinhas,1,MPI_INT,0,0,MPI_COMM_WORLD, &status);
     }
-     //   M=(NN)/size + 2;
-    //local size
-   //if(rank==0)M=M-1;
-  //if(rank==size-1) M = M-1;
-
+    
     MPI_Barrier(MPI_COMM_WORLD);
 
     double *u     = (double *)malloc(qtdlinhas * M * sizeof(double));
     double *unew  = (double *)malloc(qtdlinhas * M * sizeof(double));
 
-    /* Initialize grid and create input file 
-     * each process initialize its part
-     * */
+    
     inicializa(rank,size,qtdlinhas,M,u);
-//         imprime(rank,M,N, u, "inicial.txt");
 
     if (rank == 0) {
 
@@ -142,18 +92,11 @@ int main(int argc, char *argv[])
     int iterations_print = 1;
     double start = MPI_Wtime(); //inicio contagem do tempo
 
-    /*
-     *   iterate (JACOBI ITERATION) until the new solution unew differs from the old solution u
-     *     by no more than epsilon.
-     **/
+  
 
     while( epsilon<=globaldiff )  {
 
         diff= update(rank,size,qtdlinhas,M, u, unew);
-
-        /**
-         *   COMPUTE GLOBAL CONVERGENCE
-         * */
 
         MPI_Allreduce(&diff, &globaldiff , 1, MPI_DOUBLE, MPI_MAX, MPI_COMM_WORLD); 
         
@@ -207,18 +150,13 @@ int main(int argc, char *argv[])
 }
 
 
+/*Função update */
 
-/****************************************************************************
- *  subroutine update
- ****************************************************************************/
 double update(int rank, int size, int nx,int ny, double *u, double *unew){
     int ix, iy;
     double  diff=0.0;
     MPI_Status status;
-
-    /*
-     * EXCHANGE GHOST CELL
-     */
+    
     if (rank > 0 && rank< size-1)
     {
         MPI_Sendrecv(&u[ny*(nx-2)], ny, MPI_DOUBLE, rank+1, 0,
@@ -233,12 +171,6 @@ double update(int rank, int size, int nx,int ny, double *u, double *unew){
     else if (rank == size-1)
         MPI_Sendrecv(&u[ny*1],     ny, MPI_DOUBLE, rank-1, 1,
                 &u[ny*0],     ny, MPI_DOUBLE, rank-1, 0, MPI_COMM_WORLD, &status);
-
-
-
-    /**
-     * PERFORM LOCAL COMPUTATION
-     * */
 
     for (ix = 1; ix < nx-1; ix++) {
         for (iy = 1; iy < ny-1; iy++) {
@@ -260,38 +192,30 @@ double update(int rank, int size, int nx,int ny, double *u, double *unew){
     return diff;   
 }
 
-/*****************************************************************************
- *  Initialize Data
- *****************************************************************************/
-
+/* Função inicializa matriz */
 void inicializa(int rank, int size,int nx, int ny, double *u) 
 {
     int ix, iy;
-
-    /*
-     *Set boundary data and interrior values
-     * */
-
-
-    // interior points
+    
+    /* interiores*/
     for (ix = 1; ix < nx-1; ix++) 
         for (iy = 1; iy < ny-1; iy++) { 
             u[ix*ny+iy]=0.0; 
         }
 
-    //boundary left
+    /*limite esquerdo*/
     for (ix = 0; ix < nx; ix++){ 
         u[ix*ny]=0.0; 
 
     }
 
-    //boundary right
+    /*limite direito*/
     for (ix = 0; ix < nx; ix++){ 
         u[ix*ny+ (ny-1)]=0.0; 
 
     }
 
-    //boundary down
+    /*limite inferior*/
     for (iy = 0; iy < ny; iy++){ 
 
         if(rank==size-1) {
@@ -303,17 +227,14 @@ void inicializa(int rank, int size,int nx, int ny, double *u)
         }
     }
 
-    //boundary top
+    /*limite superior*/
     for (iy = 1; iy < ny; iy++){ 
         u[iy]=0.0;
     }
 }
 
 
-/***************************************************************************
- * Print Data to file
- **************************************************************************/
-
+/* Imprime matriz em ficheiro */
 void imprime(int rank, int nx, int ny, double *u,const char *fname)
 {
     int ix, iy;
@@ -333,7 +254,6 @@ void imprime(int rank, int nx, int ny, double *u,const char *fname)
 
             fprintf(fp, "%6.2f ", u[ix*ny+iy]);
         }
-       // fprintf(fp, "RANK%d\n",rank );
         fputc ( '\n', fp);
     }
 
