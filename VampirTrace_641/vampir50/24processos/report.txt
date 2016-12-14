@@ -1,0 +1,23 @@
+
+ Iteration  Change
+
+         1  25.000000
+         2  12.500000
+         4  5.468750
+         8  3.054810
+        16  1.516485
+        32  0.758108
+        64  0.377314
+       128  0.188316
+       256  0.088700
+       512  0.035352
+      1024  0.010278
+      2048  0.001234
+
+      2151  0.000999
+
+  Error tolerance achieved.
+Concluido com 24 processos em 0.042221 segundos.
+
+  Solution written to the output file final.txt
+  Normal end of execution.
