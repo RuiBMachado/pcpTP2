@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 #include <mpi.h>
-#define NN 30
-#define MM 30  
+#define NN 300
+#define MM 300  
 
 double update(int rank,int size, int nx,int ny, double *u, double *unew);
 void inicializa(int rank, int size, int nx, int ny, double *u); 
